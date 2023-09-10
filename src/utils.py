@@ -39,4 +39,12 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
             report[curr_mod] = test_model_score
         return report
     except Exception as err:
-        CustomException(err, sys)
+        raise CustomException(err, sys)
+
+
+def load_object(model_path):
+    try:
+        with open(model_path, "rb") as model_obj:
+            return dill.load(model_obj)
+    except Exception as err:
+        raise CustomException(err, sys)
